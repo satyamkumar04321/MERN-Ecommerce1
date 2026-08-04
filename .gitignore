@@ -18,10 +18,6 @@
 package-lock.json
 frontend/package-lock.json
 
-# large binary/media files
-frontend/src/images/studio.hdr
-frontend/src/images/macbook.glb
-
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
