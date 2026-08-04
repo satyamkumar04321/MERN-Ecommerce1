@@ -1,0 +1,55 @@
+services:
+  app:
+    build: .
+    container_name: order_planning_ecommerce
+    ports:
+      - "4001:4000"
+    environment:
+      - DB_URI={DB_HOSTED_URI}
+      - PORT=4000
+      - JWT_SECRET={JWT_SECRET_KEY}
+      - JWT_EXPIRE=5d
+      - REDIS_HOSTED_URL={REDIS_HOSTED_URL}
+    depends_on:
+      mongo:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:latest
+    container_name: my_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    restart: unless-stopped
+  
+  redis:
+    image: redis:alpine
+    container_name: my_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  mongo-data:
+    driver: local
+  elasticsearch-data:
+    driver: local
+  redis-data:
+    driver: local

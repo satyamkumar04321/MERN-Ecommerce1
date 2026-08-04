@@ -1,0 +1,76 @@
+version: "1"
+projects:
+- name: Order Planning
+  environments:
+  - name: Production
+    services:
+    - type: web
+      name: Order Planning
+      runtime: docker
+      dockerfilePath: ./Dockerfile
+      repo: https://github.com/AnantDuhan/MERN-Ecommerce
+      plan: free
+      envVars:
+      - key: config.env
+        sync: false
+      - key: ELASTIC_SEARCH_CLOUD_ID
+        sync: false
+      - key: ELASTIC_SEARCH_PASSWORD
+        sync: false
+      - key: ELASTIC_SEARCH_ENDPOINT
+        sync: false
+      - key: reCAPTCHA_SECRET_KEY
+        sync: false
+      - key: GOOGLE_OAUTH_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_OAUTH_CLIENT_ID
+        sync: false
+      - key: TWILIO_PHONE_NUMBER
+        sync: false
+      - key: AUTH_TOKEN
+        sync: false
+      - key: ACCOUNT_SID
+        sync: false
+      - key: AWS_BUCKET_REGION
+        sync: false
+      - key: AWS_BUCKET_NAME
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: RESULT_PER_PAGE
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+      - key: SMTP_MAIL
+        sync: false
+      - key: SMTP_SERVICE
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: COOKIE_EXPIRES
+        sync: false
+      - key: JWT_EXPIRES_IN
+        sync: false
+      - key: JWT_SECRET_KEY
+        sync: false
+      - key: DB_HOSTED_URI
+        sync: false
+      - key: DB_URI
+        sync: false
+      - key: STRIPE_SECRET_KEY_LIVE
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_PUBLISHABLE_KEY_LIVE
+        sync: false
+      - key: STRIPE_PUBLISHABLE_KEY
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: PORT
+        sync: false
+      region: oregon
+      buildCommand: npm install
+      autoDeployTrigger: commit
