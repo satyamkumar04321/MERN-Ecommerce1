@@ -9,9 +9,6 @@ const BackendWaker = ({ children }) => {
   const { isAwake } = useSelector(state => state.server);
   const [dots, setDots] = useState('');
 
-  // If running locally, skip the wakeup screen entirely
-  const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-
   useEffect(() => {
     dispatch(wakeUpServer());
 
@@ -21,11 +18,7 @@ const BackendWaker = ({ children }) => {
     return () => clearInterval(interval);
   }, [dispatch]);
 
-  // Local dev — skip wakeup screen, render children directly
-  if (isLocal) {
-    return children;
-  }
-
+  // Always show children — wakeup screen disabled
   if (!isAwake) {
     return (
       <div className="waker-overlay">
@@ -34,14 +27,10 @@ const BackendWaker = ({ children }) => {
             <img src={logo} alt="Ecommerce Logo" className="waker-logo" />
           </div>
           <h1 className="waker-title">Order Planning</h1>
-          <p className="waker-status">Waking up cloud services{dots}</p>
+          <p className="waker-status">Connecting to server{dots}</p>
           <div className="progress-container">
             <div className="progress-bar"></div>
           </div>
-          <p className="waker-note">
-            Render's free tier sleeps after 15 mins of inactivity. <br />
-            Usually takes 30-50 seconds to boot up.
-          </p>
         </div>
       </div>
     );
@@ -49,5 +38,7 @@ const BackendWaker = ({ children }) => {
 
   return children;
 };
+
+export default BackendWaker;
 
 export default BackendWaker;
