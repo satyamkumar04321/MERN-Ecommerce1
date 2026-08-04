@@ -59,7 +59,7 @@
             "last 1 safari version"
         ]
     },
-    "proxy": "http://localhost:8080/",
+    "proxy": "https://mern-ecommerce1-fhhm.onrender.com/",
     "devDependencies": {
         "@redux-devtools/extension": "^3.3.0"
     }
