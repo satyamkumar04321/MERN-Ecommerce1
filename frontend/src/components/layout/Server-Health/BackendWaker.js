@@ -18,7 +18,6 @@ const BackendWaker = ({ children }) => {
     return () => clearInterval(interval);
   }, [dispatch]);
 
-  // Always show children — wakeup screen disabled
   if (!isAwake) {
     return (
       <div className="waker-overlay">
@@ -38,7 +37,5 @@ const BackendWaker = ({ children }) => {
 
   return children;
 };
-
-export default BackendWaker;
 
 export default BackendWaker;
