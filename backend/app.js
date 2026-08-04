@@ -83,7 +83,7 @@ app.use("/api/v1", couponRoute);
 
 // CORS
 app.use(async (req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "https://order-planning-store.netlify.app");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Credentials", true);
   res.header("Access-Control-Allow-Methods", "*");
@@ -91,7 +91,7 @@ app.use(async (req, res, next) => {
 });
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://orderplanning.netlify.app/"],
+  origin: ["http://localhost:3000", "https://order-planning-store.netlify.app"],
   optionsSuccessStatus: 200,
   credentials: true,
 };
